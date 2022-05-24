@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="entery"
-            type="com.dashwood.neweducation.db.Entery" />
+            name="user"
+            type="com.dashwood.neweducation.db.User" />
 
         <variable
             name="click"
@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{entery.name}"
+            android:text="@{user.name}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

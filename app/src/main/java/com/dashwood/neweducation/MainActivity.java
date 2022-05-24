@@ -11,10 +11,7 @@ import android.view.View;
 
 import com.dashwood.neweducation.databinding.ActivityMainBinding;
 import com.dashwood.neweducation.db.DashwoodAppDatabase;
-import com.dashwood.neweducation.db.Entery;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.dashwood.neweducation.db.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,16 +30,16 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.setClick(handler);
         insertSomeData();
         readAllData();
-        activityMainBinding.setEntery(readAllData());
+        activityMainBinding.setUser(readAllData());
     }
 
     private void insertSomeData() {
-        dashwoodAppDatabase.getDashwoodDAO().addUser(new Entery("Dash", "Mamad", 0));
+        dashwoodAppDatabase.getDashwoodDAO().addUser(new User("Dash", "Mamad", 0));
     }
 
-    private Entery readAllData() {
-        for (Entery entery : dashwoodAppDatabase.getDashwoodDAO().enteries()) {
-            return entery;
+    private User readAllData() {
+        for (User user : dashwoodAppDatabase.getDashwoodDAO().enteries()) {
+            return user;
         }
         return null;
     }
