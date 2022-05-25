@@ -9,7 +9,6 @@ import androidx.room.PrimaryKey;
 
 import com.dashwood.neweducation.BR;
 
-import java.util.Observable;
 
 @Entity(tableName = "dashwood_tb")
 public class User extends BaseObservable {
@@ -23,7 +22,6 @@ public class User extends BaseObservable {
 
     @Ignore
     public User() {
-
     }
 
     public User(String name, String email, int id) {

@@ -7,21 +7,22 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.dashwood.neweducation.model.Category;
+
 import java.util.List;
 
 @Dao
-public interface DashwoodDAO {
+public interface CategoryDAO {
     @Insert
-    void addUser(User...users);
+    void insert(Category... categories);
 
     @Update
-    void updateUser(User user);
+    void update(Category category);
 
     @Delete
-    void deleteUser(User user);
+    void delete(Category... categories);
 
-    @Query("SELECT * FROM dashwood_tb")
-    LiveData<List<User>> enteries();
-
+    @Query("SELECT * FROM CATEGORY_TB")
+    LiveData<List<Category>> getAll();
 
 }
