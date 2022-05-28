@@ -12,6 +12,8 @@ import com.dashwood.neweducation.db.DashwoodDAO;
 import com.dashwood.neweducation.db.User;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class DashwoodRepository {
     private CategoryDAO categoryDAO;
@@ -42,7 +44,9 @@ public class DashwoodRepository {
     }
 
     public void insertCategory(Category... categories) {
-        new InsertCategoryAsyncTask(categoryDAO).execute(categories);
+        //new InsertCategoryAsyncTask(categoryDAO).execute(categories);
+        Executors.newSingleThreadExecutor().execute(() -> categoryDAO.insert(categories));
+
     }
 
     private static class InsertCategoryAsyncTask extends AsyncTask<Category, Void, Void> {

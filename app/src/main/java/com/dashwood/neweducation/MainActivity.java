@@ -1,12 +1,16 @@
 package com.dashwood.neweducation;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadBooks(int id) {
         viewModel.getBooksLiveData(id).observe(this, books -> {
-             viewRecView(books);
+            viewRecView(books);
         });
     }
 
@@ -59,6 +63,23 @@ public class MainActivity extends AppCompatActivity {
         RecItemBookAdapter adapter = new RecItemBookAdapter();
         binding.recView.setAdapter(adapter);
         adapter.setItems(books);
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                Book bookToDelete = books.get(viewHolder.getAdapterPosition());
+                viewModel.deleteNewBook(bookToDelete);
+            }
+
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        }).attachToRecyclerView(binding.recView);
     }
 
     public class MainActivityClickHandler {

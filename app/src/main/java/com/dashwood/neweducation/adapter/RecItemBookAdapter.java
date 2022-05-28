@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dashwood.neweducation.databinding.RecViewBookBinding;
 import com.dashwood.neweducation.model.Book;
+import com.dashwood.neweducation.util.BookAdapterDiffUtilsCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +42,11 @@ public class RecItemBookAdapter extends RecyclerView.Adapter<RecItemBookAdapter.
     }
 
     public void setItems(List<Book> list) {
-        this.bookList = list;
-        notifyDataSetChanged();
+        /*this.bookList = list;
+        notifyDataSetChanged();*/
+        final DiffUtil.DiffResult result = DiffUtil.calculateDiff(new BookAdapterDiffUtilsCallback(bookList, list));
+        bookList = list;
+        result.dispatchUpdatesTo(this);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

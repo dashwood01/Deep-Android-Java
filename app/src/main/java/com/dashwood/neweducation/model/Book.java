@@ -12,6 +12,8 @@ import androidx.room.PrimaryKey;
 
 import com.dashwood.neweducation.BR;
 
+import java.util.Objects;
+
 @Entity(tableName = "book_tb", foreignKeys = @ForeignKey(entity = Category.class,
         parentColumns = "id", childColumns = "category_id", onDelete = CASCADE))
 public class Book extends BaseObservable {
@@ -83,5 +85,18 @@ public class Book extends BaseObservable {
     public void setPrice(String price) {
         this.price = price;
         notifyPropertyChanged(BR.price);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id && categoryId == book.categoryId && name.equals(book.name) && description.equals(book.description) && price.equals(book.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, categoryId, name, description, price);
     }
 }
