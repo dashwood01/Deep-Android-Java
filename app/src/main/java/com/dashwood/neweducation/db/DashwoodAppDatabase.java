@@ -2,7 +2,6 @@ package com.dashwood.neweducation.db;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.text.PrecomputedText;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -13,9 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.dashwood.neweducation.model.Book;
 import com.dashwood.neweducation.model.Category;
 
-import javax.xml.transform.Result;
-
-@Database(entities = {User.class, Category.class, Book.class}, version = 3, exportSchema = false)
+@Database(entities = {Dashwood.class, Category.class, Book.class}, version = 3, exportSchema = false)
 public abstract class DashwoodAppDatabase extends RoomDatabase {
 
     public abstract DashwoodDAO getDashwoodDAO();

@@ -1,7 +1,6 @@
 package com.dashwood.neweducation.model;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
@@ -9,20 +8,15 @@ import com.dashwood.neweducation.db.BookDAO;
 import com.dashwood.neweducation.db.CategoryDAO;
 import com.dashwood.neweducation.db.DashwoodAppDatabase;
 import com.dashwood.neweducation.db.DashwoodDAO;
-import com.dashwood.neweducation.db.User;
+import com.dashwood.neweducation.db.Dashwood;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class DashwoodRepository {
-    private CategoryDAO categoryDAO;
-    private BookDAO bookDAO;
-    private DashwoodDAO dashwoodDAO;
-
-    private LiveData<List<User>> usersLiveData;
-    private LiveData<List<Category>> categoriesLiveData;
-    private LiveData<List<Book>> booksLiveData;
+    private final CategoryDAO categoryDAO;
+    private final BookDAO bookDAO;
+    private final DashwoodDAO dashwoodDAO;
 
     public DashwoodRepository(Application application) {
         DashwoodAppDatabase dashwoodAppDatabase = DashwoodAppDatabase.getInstance(application);
@@ -31,7 +25,7 @@ public class DashwoodRepository {
         dashwoodDAO = dashwoodAppDatabase.getDashwoodDAO();
     }
 
-    public LiveData<List<User>> getUsersLiveData() {
+    public LiveData<List<Dashwood>> getUsersLiveData() {
         return dashwoodDAO.enteries();
     }
 
@@ -49,114 +43,26 @@ public class DashwoodRepository {
 
     }
 
-    private static class InsertCategoryAsyncTask extends AsyncTask<Category, Void, Void> {
-
-        private CategoryDAO categoryDAO;
-
-        public InsertCategoryAsyncTask(CategoryDAO categoryDAO) {
-            this.categoryDAO = categoryDAO;
-        }
-
-        @Override
-        protected Void doInBackground(Category... categories) {
-            categoryDAO.insert(categories);
-            return null;
-        }
-    }
-
     public void insertBook(Book... books) {
-        new InsertBookAsyncTask(bookDAO).execute(books);
+        Executors.newSingleThreadExecutor().execute(() -> bookDAO.insert(books));
     }
 
-    private static class InsertBookAsyncTask extends AsyncTask<Book, Void, Void> {
-
-        private BookDAO bookDAO;
-
-        public InsertBookAsyncTask(BookDAO bookDAO) {
-            this.bookDAO = bookDAO;
-        }
-
-        @Override
-        protected Void doInBackground(Book... books) {
-            bookDAO.insert(books);
-            return null;
-        }
-    }
 
     public void deleteCategory(Category... categories) {
-        new InsertCategoryAsyncTask(categoryDAO).execute(categories);
-    }
-
-    private static class deleteCategoryAsyncTask extends AsyncTask<Category, Void, Void> {
-
-        private CategoryDAO categoryDAO;
-
-        public deleteCategoryAsyncTask(CategoryDAO categoryDAO) {
-            this.categoryDAO = categoryDAO;
-        }
-
-        @Override
-        protected Void doInBackground(Category... categories) {
-            categoryDAO.insert(categories);
-            return null;
-        }
+        Executors.newSingleThreadExecutor().execute(() -> categoryDAO.delete(categories));
     }
 
     public void deleteBook(Book... books) {
-        new InsertBookAsyncTask(bookDAO).execute(books);
-    }
-
-    private static class deleteBookAsyncTask extends AsyncTask<Book, Void, Void> {
-
-        private BookDAO bookDAO;
-
-        public deleteBookAsyncTask(BookDAO bookDAO) {
-            this.bookDAO = bookDAO;
-        }
-
-        @Override
-        protected Void doInBackground(Book... books) {
-            bookDAO.insert(books);
-            return null;
-        }
+        Executors.newSingleThreadExecutor().execute(() -> bookDAO.delete(books));
     }
 
     public void updateCategory(Category... categories) {
-        new InsertCategoryAsyncTask(categoryDAO).execute(categories);
-    }
-
-    private static class updateCategoryAsyncTask extends AsyncTask<Category, Void, Void> {
-
-        private CategoryDAO categoryDAO;
-
-        public updateCategoryAsyncTask(CategoryDAO categoryDAO) {
-            this.categoryDAO = categoryDAO;
-        }
-
-        @Override
-        protected Void doInBackground(Category... categories) {
-            categoryDAO.insert(categories);
-            return null;
-        }
+        Executors.newSingleThreadExecutor().execute(() -> categoryDAO.update(categories));
     }
 
     public void updateBook(Book... books) {
-        new InsertBookAsyncTask(bookDAO).execute(books);
+        Executors.newSingleThreadExecutor().execute(() -> bookDAO.update(books));
     }
 
-    private static class updateBookAsyncTask extends AsyncTask<Book, Void, Void> {
-
-        private BookDAO bookDAO;
-
-        public updateBookAsyncTask(BookDAO bookDAO) {
-            this.bookDAO = bookDAO;
-        }
-
-        @Override
-        protected Void doInBackground(Book... books) {
-            bookDAO.insert(books);
-            return null;
-        }
-    }
 
 }

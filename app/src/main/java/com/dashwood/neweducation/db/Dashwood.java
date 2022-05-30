@@ -7,11 +7,10 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.dashwood.neweducation.BR;
 
 
 @Entity(tableName = "dashwood_tb")
-public class User extends BaseObservable {
+public class Dashwood extends BaseObservable {
     @ColumnInfo(name = "name")
     private String name;
     @ColumnInfo(name = "email")
@@ -21,16 +20,16 @@ public class User extends BaseObservable {
     private int id;
 
     @Ignore
-    public User() {
+    public Dashwood() {
     }
 
-    public User(String name, String email, int id) {
+    public Dashwood(String name, String email, int id) {
         this.name = name;
         this.email = email;
         this.id = id;
-        notifyPropertyChanged(BR.id);
+        /*notifyPropertyChanged(BR.id);
         notifyPropertyChanged(BR.name);
-        notifyPropertyChanged(BR.email);
+        notifyPropertyChanged(BR.email);*/
     }
 
     @Bindable

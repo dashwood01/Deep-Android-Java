@@ -10,7 +10,6 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import com.dashwood.neweducation.BR;
 
 import java.util.Objects;
 
@@ -44,7 +43,7 @@ public class Book extends BaseObservable {
 
     public void setId(int id) {
         this.id = id;
-        notifyPropertyChanged(BR.id);
+       // notifyPropertyChanged(BR.id);
     }
 
     @Bindable
@@ -54,7 +53,7 @@ public class Book extends BaseObservable {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
-        notifyPropertyChanged(BR.categoryId);
+      //  notifyPropertyChanged(BR.categoryId);
     }
 
     @Bindable
@@ -64,7 +63,7 @@ public class Book extends BaseObservable {
 
     public void setName(String name) {
         this.name = name;
-        notifyPropertyChanged(BR.name);
+        //notifyPropertyChanged(BR.name);
     }
 
     @Bindable
@@ -74,7 +73,7 @@ public class Book extends BaseObservable {
 
     public void setDescription(String description) {
         this.description = description;
-        notifyPropertyChanged(BR.description);
+        //notifyPropertyChanged(BR.description);
     }
 
     @Bindable
@@ -84,7 +83,7 @@ public class Book extends BaseObservable {
 
     public void setPrice(String price) {
         this.price = price;
-        notifyPropertyChanged(BR.price);
+        //notifyPropertyChanged(BR.price);
     }
 
     @Override

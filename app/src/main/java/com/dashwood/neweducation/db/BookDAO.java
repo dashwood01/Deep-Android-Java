@@ -19,7 +19,7 @@ public interface BookDAO {
     void insert(Book... books);
 
     @Update
-    void update(Book book);
+    void update(Book...books);
 
     @Delete
     void delete(Book... books);

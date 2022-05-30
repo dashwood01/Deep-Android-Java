@@ -12,16 +12,16 @@ import java.util.List;
 @Dao
 public interface DashwoodDAO {
     @Insert
-    void addUser(User...users);
+    void addUser(Dashwood...users);
 
     @Update
-    void updateUser(User user);
+    void updateUser(Dashwood user);
 
     @Delete
-    void deleteUser(User user);
+    void deleteUser(Dashwood user);
 
     @Query("SELECT * FROM dashwood_tb")
-    LiveData<List<User>> enteries();
+    LiveData<List<Dashwood>> enteries();
 
 
 }

@@ -7,7 +7,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.dashwood.neweducation.BR;
 
 @Entity(tableName = "category_tb")
 public class Category extends BaseObservable {
@@ -33,7 +32,7 @@ public class Category extends BaseObservable {
 
     public void setId(int id) {
         this.id = id;
-        notifyPropertyChanged(BR.id);
+        // notifyPropertyChanged(BR.id);
     }
 
     @Bindable
@@ -43,7 +42,7 @@ public class Category extends BaseObservable {
 
     public void setName(String name) {
         this.name = name;
-        notifyPropertyChanged(BR.name);
+      //  notifyPropertyChanged(BR.name);
     }
 
     @Bindable
@@ -53,7 +52,7 @@ public class Category extends BaseObservable {
 
     public void setDescription(String description) {
         this.description = description;
-        notifyPropertyChanged(BR.description);
+      //  notifyPropertyChanged(BR.description);
     }
 
     @NonNull
