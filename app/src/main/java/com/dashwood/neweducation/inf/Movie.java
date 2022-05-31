@@ -1,9 +1,15 @@
 package com.dashwood.neweducation.inf;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
 import android.os.Parcelable.Creator;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -92,4 +98,28 @@ public class Movie implements Parcelable
         return 0;
     }
 
+    public static DiffUtil.ItemCallback<Result> CALLBACK = new DiffUtil.ItemCallback<Result>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Result oldItem, @NonNull Result newItem) {
+            return oldItem.equals(newItem);
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Result oldItem, @NonNull Result newItem) {
+            return true;
+        }
+    };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return page.equals(movie.page) && results.equals(movie.results) && totalPages.equals(movie.totalPages) && totalResults.equals(movie.totalResults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(page, results, totalPages, totalResults);
+    }
 }
