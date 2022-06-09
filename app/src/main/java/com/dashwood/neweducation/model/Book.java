@@ -19,7 +19,7 @@ public class Book extends BaseObservable {
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     private int id;
-    @ColumnInfo(name = "category_id")
+    @ColumnInfo(name = "category_id", index = true)
     private int categoryId;
     @ColumnInfo(name = "name")
     private String name;
@@ -43,7 +43,7 @@ public class Book extends BaseObservable {
 
     public void setId(int id) {
         this.id = id;
-       // notifyPropertyChanged(BR.id);
+        // notifyPropertyChanged(BR.id);
     }
 
     @Bindable
@@ -53,7 +53,7 @@ public class Book extends BaseObservable {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
-      //  notifyPropertyChanged(BR.categoryId);
+        //  notifyPropertyChanged(BR.categoryId);
     }
 
     @Bindable

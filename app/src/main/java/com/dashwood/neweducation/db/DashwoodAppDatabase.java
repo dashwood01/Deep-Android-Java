@@ -1,5 +1,6 @@
 package com.dashwood.neweducation.db;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -23,7 +24,7 @@ public abstract class DashwoodAppDatabase extends RoomDatabase {
 
     private static DashwoodAppDatabase instance;
 
-    public static synchronized DashwoodAppDatabase getInstance(Context context) {
+    public static synchronized DashwoodAppDatabase getInstance(Application context) {
         if (instance == null)
             instance = Room.databaseBuilder(context, DashwoodAppDatabase.class, "dashwood_db")
                     .fallbackToDestructiveMigration()

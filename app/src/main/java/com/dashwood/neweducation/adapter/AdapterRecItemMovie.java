@@ -7,7 +7,10 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.paging.PagedList;
 import androidx.paging.PagedListAdapter;
+import androidx.paging.PagingDataAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +60,7 @@ public class AdapterRecItemMovie extends PagedListAdapter<Result, AdapterRecItem
             Log.i("LOG", imageUrl);
         });
     }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final RecItemUserBinding binding;

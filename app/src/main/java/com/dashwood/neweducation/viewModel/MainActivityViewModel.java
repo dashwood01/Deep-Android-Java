@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.dashwood.neweducation.R;
 import com.dashwood.neweducation.db.DashwoodAppDatabase;
@@ -14,15 +15,14 @@ import com.dashwood.neweducation.model.DashwoodRepository;
 
 import java.util.List;
 
-public class MainActivityViewModel extends AndroidViewModel {
+public class MainActivityViewModel extends ViewModel {
 
     private LiveData<List<Category>> categoriesLiveData;
     private LiveData<List<Book>> booksLiveData;
     private DashwoodRepository repository;
 
-    public MainActivityViewModel(@NonNull Application application) {
-        super(application);
-        repository = new DashwoodRepository(application);
+    public MainActivityViewModel(DashwoodRepository dashwoodRepository) {
+        repository = dashwoodRepository;
     }
 
     public LiveData<List<Category>> getCategoriesLiveData() {

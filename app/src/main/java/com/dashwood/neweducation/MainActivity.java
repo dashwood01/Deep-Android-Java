@@ -19,11 +19,15 @@ import android.widget.ArrayAdapter;
 
 import com.dashwood.neweducation.adapter.RecItemBookAdapter;
 import com.dashwood.neweducation.databinding.ActivityMainBinding;
+import com.dashwood.neweducation.extra.A;
 import com.dashwood.neweducation.model.Book;
 import com.dashwood.neweducation.model.Category;
 import com.dashwood.neweducation.viewModel.MainActivityViewModel;
+import com.dashwood.neweducation.viewModel.MainActivityViewModelFactory;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,13 +36,19 @@ public class MainActivity extends AppCompatActivity {
     private MainActivityViewModel viewModel;
     private List<Category> categoryList;
 
+    /*@Inject
+    private MainActivityViewModelFactory viewModelFactory;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //A.getApplicationClass().getBookComponent().inject(this);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         handler = new MainActivityClickHandler(getApplicationContext());
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+       // viewModel = new ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel.class);
         viewModel.getCategoriesLiveData().observe(this, categories -> {
             categoryList = categories;
             showItemAdapter(categories);
