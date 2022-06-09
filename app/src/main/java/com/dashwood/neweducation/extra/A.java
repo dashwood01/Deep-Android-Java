@@ -23,10 +23,7 @@ public class A extends Application {
                 .builder()
                 .applicationModule(new ApplicationModule(this))
                 .repositoryDatabase(new RepositoryDatabase()).build();*/
-        movieComponent = DaggerMovieComponent
-                .builder()
-                .applicationModule(new ApplicationModule(this))
-                .repositoryModule(new RepositoryModule()).build();
+        movieComponent = DaggerMovieComponent.create();
     }
 
     public MovieComponent getMovieComponent() {

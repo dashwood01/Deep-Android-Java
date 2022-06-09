@@ -1,45 +1,30 @@
 package com.dashwood.neweducation;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelKt;
-import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
-import androidx.paging.Pager;
-import androidx.paging.PagingConfig;
-import androidx.paging.PagingData;
-import androidx.paging.PagingLiveData;
-import androidx.paging.PagingSource;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.dashwood.neweducation.adapter.AdapterRecItemMovie;
 import com.dashwood.neweducation.extra.A;
-import com.dashwood.neweducation.inf.Movie;
 import com.dashwood.neweducation.inf.Result;
-import com.dashwood.neweducation.inf.User;
 import com.dashwood.neweducation.model.MovieDataSourceFactory;
 import com.dashwood.neweducation.model.MovingDataSource;
 import com.dashwood.neweducation.service.GetMoviesDataService;
 import com.dashwood.neweducation.service.RetrofitInstance;
+import com.dashwood.neweducation.viewModel.InjectOfRepo;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
-import kotlin.jvm.functions.Function0;
-import kotlinx.coroutines.CoroutineScope;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import retrofit2.Retrofit;
+
 
 public class InRetrofitActivity extends AppCompatActivity {
 
@@ -48,6 +33,7 @@ public class InRetrofitActivity extends AppCompatActivity {
     private RecyclerView rec;
 
     @Inject
+    RetrofitInstance retrofitInstance;
     private GetMoviesDataService getMoviesDataService;
 
     @Override
@@ -55,6 +41,7 @@ public class InRetrofitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_retrofit);
         A.getApplicationClass().getMovieComponent().inject(this);
+        getMoviesDataService = retrofitInstance.getService();
         rec = findViewById(R.id.recItemUser);
         rec.setLayoutManager(new GridLayoutManager(this, 2));
         adapterRecItemUser = new AdapterRecItemMovie();

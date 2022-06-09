@@ -24,7 +24,7 @@ public class RepositoryModule {
 
     @Singleton
     @Provides
-    GetMoviesDataService providerRetrofit() {
-        return RetrofitInstance.getService();
+    RetrofitInstance providerRetrofit() {
+        return new RetrofitInstance();
     }
 }

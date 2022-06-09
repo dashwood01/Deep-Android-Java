@@ -9,6 +9,9 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.Provides;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
